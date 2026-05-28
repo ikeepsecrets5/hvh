@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Configurações{% endblock %}
+{% block content %}
+<form class="panel form-grid wide" method="post">
+    <label>Nome do bot<input name="bot_name" value="{{ config.bot_name }}"></label>
+    <label>Tema<input name="theme" value="{{ config.theme }}"></label>
+    <label>ID pessoa idolatrada<input name="idol_user_id" value="{{ config.idol_user_id }}"></label>
+    <label>ID cargo idolatrado<input name="idol_role_id" value="{{ config.idol_role_id }}"></label>
+    <label>Canal RNG<input name="rng_channel_id" value="{{ config.rng_channel_id }}"></label>
+    <label>Canal anime<input name="anime_channel_id" value="{{ config.anime_channel_id }}"></label>
+    <label>Canal log call<input name="voice_log_channel_id" value="{{ config.voice_log_channel_id }}"></label>
+    <label class="full">Mensagem interna<input name="welcome_message" value="{{ config.welcome_message }}"></label>
+    <label class="switch full">
+        <input type="checkbox" name="maintenance" {% if config.maintenance %}checked{% endif %}>
+        <span>Modo manutenção</span>
+    </label>
+    <button>Salvar configurações</button>
+</form>
+{% endblock %}

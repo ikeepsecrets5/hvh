@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config.bot_name }} • Painel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="noise"></div>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-orb">L</div>
+            <div>
+                <strong>{{ config.bot_name }}</strong>
+                <span>Painel Neural</span>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('users') }}">Usuários</a>
+            <a href="{{ url_for('commands') }}">Comandos</a>
+            <a href="{{ url_for('settings') }}">Configurações</a>
+            <a href="{{ url_for('logs') }}">Logs</a>
+            <a href="{{ url_for('logout') }}">Sair</a>
+        </nav>
+        <div class="sidebar-card">
+            <span>Status</span>
+            <strong>{% if config.maintenance %}Manutenção{% else %}Online{% endif %}</strong>
+        </div>
+    </aside>
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <p>Painel administrativo</p>
+                <h1>{% block title %}{% endblock %}</h1>
+            </div>
+            <div class="pulse-badge">
+                <i></i>
+                Seguro
+            </div>
+        </header>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <section class="flash-stack">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

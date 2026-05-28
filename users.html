@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Usuários{% endblock %}
+{% block content %}
+<section class="panel">
+    <form class="searchbar" method="get">
+        <input name="q" placeholder="Buscar por ID, aura ou classe..." value="{{ query }}">
+        <button>Buscar</button>
+    </form>
+    <div class="table">
+        <div class="table-row table-head">
+            <span>ID</span>
+            <span>Moedas</span>
+            <span>XP</span>
+            <span>Aura</span>
+            <span>Ação</span>
+        </div>
+        {% for user in users %}
+            <div class="table-row">
+                <span>{{ user.id }}</span>
+                <span>{{ user.money }}</span>
+                <span>{{ user.xp }}</span>
+                <span>{{ user.aura }}</span>
+                <a href="{{ url_for('edit_user', user_id=user.id) }}">Editar</a>
+            </div>
+        {% else %}
+            <p class="muted pad">Nenhum usuário encontrado.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

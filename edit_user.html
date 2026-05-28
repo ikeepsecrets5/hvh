@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Editar usuário{% endblock %}
+{% block content %}
+<section class="split">
+    <form class="panel form-grid" method="post">
+        <h2>{{ user_id }}</h2>
+        <label>Moedas<input name="money" value="{{ user.money }}"></label>
+        <label>XP<input name="xp" value="{{ user.xp }}"></label>
+        <label>Rolls<input name="rolls" value="{{ user.rolls }}"></label>
+        <label>Anime rolls<input name="anime_rolls" value="{{ user.anime_rolls }}"></label>
+        <label>Kakera<input name="kakera" value="{{ user.kakera }}"></label>
+        <label>Luck<input name="luck" value="{{ user.luck }}"></label>
+        <label>Fragmentos aura<input name="aura_frag" value="{{ user.aura_frag }}"></label>
+        <label>Fragmentos anime<input name="anime_frag" value="{{ user.anime_frag }}"></label>
+        <label>Classe<input name="classe" value="{{ user.classe or '' }}"></label>
+        <label>Melhor aura<input name="melhor_aura" value="{{ user.melhor_aura or '' }}"></label>
+        <label>Poder da aura<input name="melhor_aura_poder" value="{{ user.melhor_aura_poder }}"></label>
+        <button>Salvar usuário</button>
+    </form>
+    <div class="panel">
+        <h2>Ajuste rápido</h2>
+        <form class="quick-grant" method="post" action="{{ url_for('grant_user', user_id=user_id) }}">
+            <select name="kind">
+                <option value="money">Moedas</option>
+                <option value="xp">XP</option>
+                <option value="rolls">Rolls</option>
+                <option value="anime_rolls">Anime rolls</option>
+                <option value="kakera">Kakera</option>
+            </select>
+            <input name="amount" placeholder="Ex: 100 ou -50">
+            <button>Aplicar</button>
+        </form>
+        <div class="glass-note">
+            <strong>Coleção</strong>
+            <p>{{ user.harem|length }} personagens no harem.</p>
+        </div>
+        <div class="glass-note">
+            <strong>Badges</strong>
+            <p>{{ user.badges|join(', ') if user.badges else 'Nenhuma badge.' }}</p>
+        </div>
+        <div class="glass-note">
+            <strong>Títulos</strong>
+            <p>{{ user.titles|join(', ') if user.titles else 'Nenhum título.' }}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Logs{% endblock %}
+{% block content %}
+<section class="panel">
+    <div class="timeline large">
+        {% for log in logs %}
+            <div>
+                <i></i>
+                <p><strong>{{ log.action }}</strong>{{ log.detail }} <small>{{ log.ip }}</small></p>
+            </div>
+        {% else %}
+            <p class="muted">Nenhum log registrado.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

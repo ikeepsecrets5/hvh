@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Visão geral{% endblock %}
+{% block content %}
+<section class="hero-grid">
+    <div class="hero-card">
+        <span>Usuários salvos</span>
+        <strong>{{ users|length }}</strong>
+        <p>Perfis encontrados no data.json.</p>
+    </div>
+    <div class="hero-card">
+        <span>Moedas totais</span>
+        <strong>{{ total_money }}</strong>
+        <p>Economia total do servidor.</p>
+    </div>
+    <div class="hero-card">
+        <span>XP total</span>
+        <strong>{{ total_xp }}</strong>
+        <p>Progressão acumulada.</p>
+    </div>
+    <div class="hero-card">
+        <span>Giros totais</span>
+        <strong>{{ total_rolls }}</strong>
+        <p>Tickets de aura disponíveis.</p>
+    </div>
+</section>
+
+<section class="split">
+    <div class="panel">
+        <div class="panel-head">
+            <h2>Top jogadores</h2>
+            <a href="{{ url_for('users') }}">ver todos</a>
+        </div>
+        <div class="rank-list">
+            {% for user in top_users %}
+                <a class="rank-item" href="{{ url_for('edit_user', user_id=user.id) }}">
+                    <div class="rank-index">{{ loop.index }}</div>
+                    <div>
+                        <strong>{{ user.id }}</strong>
+                        <span>{{ user.aura }} • {{ user.classe }}</span>
+                    </div>
+                    <em>{{ user.xp }} XP</em>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-head">
+            <h2>Atividade recente</h2>
+            <a href="{{ url_for('logs') }}">logs</a>
+        </div>
+        <div class="timeline">
+            {% for log in logs %}
+                <div>
+                    <i></i>
+                    <p><strong>{{ log.action }}</strong>{{ log.detail }}</p>
+                </div>
+            {% else %}
+                <p class="muted">Nenhum log ainda.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

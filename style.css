@@ -1,0 +1,546 @@
+:root {
+    --bg: #070812;
+    --card: rgba(255, 255, 255, .075);
+    --card-strong: rgba(255, 255, 255, .12);
+    --text: #f7f7ff;
+    --muted: #a9abc2;
+    --line: rgba(255, 255, 255, .12);
+    --pink: #ff4ecd;
+    --blue: #4ddcff;
+    --green: #8dff9a;
+    --yellow: #ffe66d;
+    --danger: #ff5c7a;
+    --radius: 28px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 15% 10%, rgba(255, 78, 205, .24), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(77, 220, 255, .20), transparent 35%),
+        radial-gradient(circle at 50% 90%, rgba(141, 255, 154, .14), transparent 38%),
+        var(--bg);
+    overflow-x: hidden;
+}
+
+.noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .17;
+    background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(circle, black, transparent 85%);
+}
+
+.sidebar {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    bottom: 18px;
+    width: 270px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(6, 7, 18, .72);
+    backdrop-filter: blur(24px);
+    box-shadow: 0 20px 80px rgba(0,0,0,.35);
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.brand-orb, .mini-logo {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--pink), var(--blue));
+    color: white;
+    font-weight: 900;
+    box-shadow: 0 0 35px rgba(255,78,205,.45);
+}
+
+.brand strong {
+    display: block;
+    font-size: 15px;
+}
+
+.brand span, .topbar p, .hero-card span, .command-card span, .sidebar-card span {
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+nav {
+    display: grid;
+    gap: 8px;
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 13px 14px;
+    border-radius: 16px;
+    transition: .2s;
+}
+
+nav a:hover {
+    color: var(--text);
+    background: var(--card);
+    transform: translateX(4px);
+}
+
+.sidebar-card {
+    margin-top: auto;
+    padding: 18px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(255,78,205,.13), rgba(77,220,255,.13));
+    border: 1px solid var(--line);
+}
+
+.sidebar-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 24px;
+}
+
+.main {
+    margin-left: 320px;
+    padding: 28px 34px 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 26px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: clamp(32px, 5vw, 58px);
+    letter-spacing: -0.05em;
+}
+
+.pulse-badge {
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    backdrop-filter: blur(18px);
+}
+
+.pulse-badge i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 22px var(--green);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.hero-card, .panel, .command-card, .error-card {
+    border: 1px solid var(--line);
+    background: var(--card);
+    backdrop-filter: blur(24px);
+    border-radius: var(--radius);
+    box-shadow: 0 18px 55px rgba(0,0,0,.22);
+}
+
+.hero-card {
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-card::after {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    right: -30px;
+    top: -30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink), var(--blue));
+    opacity: .22;
+}
+
+.hero-card strong {
+    display: block;
+    font-size: 36px;
+    margin: 8px 0 4px;
+}
+
+.hero-card p, .command-card p, .muted {
+    color: var(--muted);
+}
+
+.split {
+    display: grid;
+    grid-template-columns: 1.25fr .85fr;
+    gap: 18px;
+}
+
+.panel {
+    padding: 22px;
+}
+
+.panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.panel h2 {
+    margin: 0;
+}
+
+.panel-head a, .table a, .error-card a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.rank-list {
+    display: grid;
+    gap: 10px;
+}
+
+.rank-item {
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.055);
+    transition: .2s;
+}
+
+.rank-item:hover {
+    background: var(--card-strong);
+    transform: translateY(-2px);
+}
+
+.rank-index {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--pink), var(--blue));
+    font-weight: 900;
+}
+
+.rank-item span {
+    display: block;
+    color: var(--muted);
+    margin-top: 3px;
+}
+
+.rank-item em {
+    font-style: normal;
+    color: var(--green);
+}
+
+.timeline {
+    display: grid;
+    gap: 16px;
+}
+
+.timeline div {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 12px;
+}
+
+.timeline i {
+    width: 10px;
+    height: 10px;
+    margin-top: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 18px var(--blue);
+}
+
+.timeline p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.timeline strong {
+    display: block;
+    color: var(--text);
+}
+
+.timeline small {
+    display: block;
+    color: rgba(255,255,255,.35);
+    margin-top: 3px;
+}
+
+.searchbar, .quick-grant {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+input, select, button {
+    font: inherit;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: rgba(0,0,0,.2);
+    color: var(--text);
+    outline: none;
+}
+
+button {
+    border: 0;
+    border-radius: 16px;
+    padding: 13px 18px;
+    color: #051018;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--green), var(--blue));
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(77,220,255,.24);
+}
+
+.table {
+    display: grid;
+    gap: 8px;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 1.3fr .6fr .6fr 1fr .4fr;
+    gap: 10px;
+    align-items: center;
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.05);
+}
+
+.table-head {
+    color: var(--muted);
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: .08em;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 14px;
+}
+
+.form-grid h2, .form-grid button, .form-grid .full {
+    grid-column: 1 / -1;
+}
+
+label {
+    color: var(--muted);
+    display: grid;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.glass-note {
+    margin-top: 14px;
+    padding: 16px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.055);
+    border: 1px solid var(--line);
+}
+
+.glass-note p {
+    color: var(--muted);
+    margin-bottom: 0;
+}
+
+.command-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 16px;
+}
+
+.command-card {
+    padding: 20px;
+    transition: .2s;
+}
+
+.command-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(77,220,255,.55);
+}
+
+.command-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 22px;
+}
+
+.flash-stack {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.flash {
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: var(--card);
+}
+
+.flash.success {
+    color: var(--green);
+}
+
+.flash.danger {
+    color: var(--danger);
+}
+
+.login-body {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.login-shell {
+    width: min(1050px, 100%);
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.login-art, .login-card {
+    border-radius: 36px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.07);
+    backdrop-filter: blur(24px);
+    padding: 34px;
+    box-shadow: 0 30px 90px rgba(0,0,0,.32);
+}
+
+.login-art {
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    position: relative;
+}
+
+.planet {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, #fff, transparent 8%),
+        linear-gradient(135deg, var(--pink), var(--blue) 52%, var(--green));
+    box-shadow: 0 0 100px rgba(77,220,255,.4);
+}
+
+.login-art h1 {
+    font-size: 56px;
+    line-height: .92;
+    letter-spacing: -0.06em;
+    margin: 0 0 12px;
+}
+
+.login-art p, .login-card p, .login-card small {
+    color: var(--muted);
+}
+
+.login-card {
+    display: grid;
+    align-content: center;
+    gap: 13px;
+}
+
+.login-card h2 {
+    margin: 10px 0 0;
+    font-size: 32px;
+}
+
+.error-card {
+    padding: 50px;
+    text-align: center;
+}
+
+.error-card strong {
+    display: block;
+    font-size: 86px;
+    letter-spacing: -0.08em;
+}
+
+.pad {
+    padding: 18px;
+}
+
+@media (max-width: 980px) {
+    .sidebar {
+        position: static;
+        width: auto;
+        margin: 14px;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 14px;
+    }
+
+    .hero-grid, .split, .command-grid, .login-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .table-row {
+        grid-template-columns: 1fr;
+    }
+
+    .login-art {
+        min-height: 360px;
+    }
+}
