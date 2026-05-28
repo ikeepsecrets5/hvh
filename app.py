@@ -295,4 +295,4 @@ def rate_limited(error):
     return render_template("error.html", code=429, message="Calma aí, muitas tentativas em pouco tempo."), 429
 
 if __name__ == "__main__":
-    app.run(host=os.getenv("PANEL_HOST", "0.0.0.0"), port=int(os.getenv("PANEL_PORT", "8080")), debug=False)
+    app.run(host=os.getenv("PANEL_HOST", "0.0.0.0"), port=int(os.getenv("PORT", os.getenv("PANEL_PORT", "10000"))))
